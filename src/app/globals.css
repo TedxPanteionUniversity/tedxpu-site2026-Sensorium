@@ -459,33 +459,120 @@ a {
   font-style: italic;
 }
 
-.about-panel {
+.about-cover {
   position: relative;
   overflow: hidden;
-  min-height: 32rem;
-  padding: clamp(1.5rem, 4vw, 3rem);
-  border: 1px solid rgb(0 0 0 / 14%);
-  border-radius: 8px;
+  min-height: clamp(45rem, 92svh, 68rem);
+  padding-bottom: clamp(4rem, 8vw, 8rem);
   background: #ffffff;
 }
 
-.about-panel p {
+.about-title {
   position: relative;
   z-index: 1;
-  max-width: 42rem;
-  font-size: clamp(1.35rem, 2.8vw, 2.6rem);
-  font-weight: 300;
-  line-height: 1.08;
+  left: 50%;
+  width: 112vw;
+  margin: 0;
+  color: #000000;
+  line-height: 0;
+  transform: translateX(-50%);
+}
+
+.about-title-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.about-title-svg text {
+  fill: currentColor;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 295px;
+  font-weight: 950;
   letter-spacing: 0;
 }
 
-.about-mark {
-  position: absolute;
-  right: -14rem;
-  bottom: -4rem;
-  width: min(58rem, 100vw);
-  max-width: none;
-  opacity: 0.08;
+.about-brand-row {
+  position: relative;
+  z-index: 3;
+  left: clamp(7rem, 13vw, 16rem);
+  display: grid;
+  width: min(100% - 2rem, 94rem);
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  column-gap: clamp(0.7rem, 1.9vw, 2.4rem);
+  align-items: end;
+  margin: clamp(-1rem, -1vw, -0.35rem) auto 0;
+}
+
+.about-brand {
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 950;
+  letter-spacing: 0;
+  line-height: 0.72;
+  white-space: nowrap;
+}
+
+.about-brand-ted,
+.about-brand-tedx {
+  color: #ff0800;
+  font-size: clamp(5rem, 13.5vw, 14.2rem);
+}
+
+.about-brand-ted {
+  text-align: right;
+}
+
+.about-brand-tedx {
+  text-align: left;
+}
+
+.about-brand-connector {
+  color: #000000;
+  font-size: clamp(11rem, 31vw, 31rem);
+  line-height: 0.46;
+  margin-inline: clamp(-2.4rem, -2vw, -1rem);
+  transform: translateY(0.1em);
+}
+
+.about-copy-grid {
+  position: relative;
+  z-index: 4;
+  display: grid;
+  width: min(100% - 2rem, 104rem);
+  grid-template-columns: 41fr 34fr 25fr;
+  column-gap: clamp(1rem, 3vw, 4rem);
+  margin: clamp(3.5rem, 5.5vw, 6rem) auto 0;
+  align-items: start;
+}
+
+.about-copy-block {
+  color: #000000;
+  font-size: clamp(1.35rem, 2.05vw, 2.25rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.about-copy-block p {
+  margin: 0;
+}
+
+.about-copy-block p + p {
+  margin-top: 1em;
+}
+
+.about-copy-ted {
+  grid-column: 1;
+  max-width: 52rem;
+  text-align: left;
+}
+
+.about-copy-tedx {
+  grid-column: 3;
+  justify-self: end;
+  max-width: 36rem;
+  text-align: center;
 }
 
 .glyph-shell {
@@ -545,6 +632,31 @@ a {
 }
 
 @media (max-width: 1100px) {
+  .about-cover {
+    min-height: auto;
+  }
+
+  .about-title {
+    width: 126vw;
+  }
+
+  .about-brand-row {
+    left: clamp(2rem, 8vw, 5rem);
+  }
+
+  .about-brand-connector {
+    font-size: clamp(8.5rem, 27vw, 17rem);
+  }
+
+  .about-copy-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(3rem, 10vw) minmax(0, 1fr);
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .about-copy-block {
+    font-size: clamp(1.1rem, 2.4vw, 1.65rem);
+  }
+
   .teams-content {
     gap: clamp(5rem, 11vw, 8rem);
     margin-top: clamp(-5rem, -6vw, -2.5rem);
@@ -579,6 +691,53 @@ a {
 @media (max-width: 720px) {
   .site-sections {
     margin-top: -66svh;
+  }
+
+  .about-cover {
+    padding-bottom: clamp(4rem, 15vw, 6rem);
+  }
+
+  .about-title {
+    left: 50%;
+    width: 178vw;
+  }
+
+  .about-brand-row {
+    left: 0;
+    width: min(100% - 1.5rem, 28rem);
+    grid-template-columns: 1fr;
+    justify-items: center;
+    row-gap: 0.35rem;
+    margin-top: -0.2rem;
+  }
+
+  .about-brand-ted,
+  .about-brand-tedx {
+    font-size: clamp(4.5rem, 25vw, 7rem);
+    text-align: center;
+  }
+
+  .about-brand-connector {
+    font-size: clamp(7rem, 37vw, 11rem);
+    margin-block: -0.2rem -0.4rem;
+  }
+
+  .about-copy-grid {
+    width: min(100% - 2rem, 34rem);
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: clamp(2rem, 9vw, 3.5rem);
+  }
+
+  .about-copy-block,
+  .about-copy-ted,
+  .about-copy-tedx {
+    grid-column: 1;
+    justify-self: stretch;
+    max-width: none;
+    font-size: clamp(1.08rem, 5.5vw, 1.45rem);
+    line-height: 1.15;
+    text-align: left;
   }
 
   .cover-section {

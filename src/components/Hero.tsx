@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const TARGET_DATE = new Date("2026-05-23T00:00:00+03:00").getTime();
 
@@ -30,16 +29,16 @@ const heroDoodles: HeroDoodle[] = [
   {
     name: "nose",
     src: "/assets/doodle-animations/nose.mp4",
-    left: "-14.0%",
-    top: "8.2%",
-    width: "11.1%",
+    left: "-16.5%",
+    top: "-2.2%",
+    width: "14.1%",
   },
   {
     name: "pink ear",
     src: "/assets/doodle-animations/ear.mp4",
-    left: "22.8%",
-    top: "0.2%",
-    width: "9.4%",
+    left: "17.8%",
+    top: "-10.2%",
+    width: "10.8%",
     rotate: -26.2,
   },
   {
@@ -54,14 +53,14 @@ const heroDoodles: HeroDoodle[] = [
     src: "/assets/doodle-animations/eye.mp4",
     left: "99.6%",
     top: "5.2%",
-    width: "14.4%",
+    width: "16.4%",
   },
   {
     name: "pink hand",
     src: "/assets/doodle-animations/hand.mp4",
     left: "79.5%",
     top: "67.2%",
-    width: "10.1%",
+    width: "13.1%",
     rotate: 36.1,
   },
   {
@@ -69,7 +68,7 @@ const heroDoodles: HeroDoodle[] = [
     src: "/assets/doodle-animations/mouth.mp4",
     left: "16%",
     top: "72.4%",
-    width: "11.5%",
+    width: "14.5%",
   },
 ] as const;
 
@@ -87,12 +86,12 @@ const heroStaticDoodles: HeroStaticDoodle[] = [
   {
     name: "music note",
     src: "/assets/doodles/music.svg",
-    left: "35.8%",
-    top: "-4.8%",
-    cssWidth: "10.2%",
+    left: "38.2%",
+    top: "-12.8%",
+    cssWidth: "11.7%",
     intrinsicWidth: 112,
     intrinsicHeight: 113,
-    rotate: -8,
+    rotate: 0,
   },
   {
     name: "sun",
@@ -138,25 +137,15 @@ function getCountdownLabel() {
 
 function DoodleVideo({ doodle }: { doodle: HeroDoodle }) {
   return (
-    <motion.div
+    <div
       className="hero-doodle"
       aria-hidden="true"
       style={{
         left: doodle.left,
         top: doodle.top,
         width: doodle.width,
+        rotate: `${doodle.rotate ?? 0}deg`,
       }}
-      initial={{
-        opacity: 0,
-        scale: 0.9,
-        rotate: (doodle.rotate ?? 0) - 4,
-      }}
-      animate={{
-        opacity: 1,
-        scale: 1,
-        rotate: doodle.rotate ?? 0,
-      }}
-      transition={{ duration: 0.7, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
     >
       <video
         className="hero-doodle-video"
@@ -168,31 +157,21 @@ function DoodleVideo({ doodle }: { doodle: HeroDoodle }) {
         preload="auto"
         title=""
       />
-    </motion.div>
+    </div>
   );
 }
 
 function StaticDoodle({ doodle }: { doodle: HeroStaticDoodle }) {
   return (
-    <motion.div
+    <div
       className="hero-static-doodle"
       aria-hidden="true"
       style={{
         left: doodle.left,
         top: doodle.top,
         width: doodle.cssWidth,
+        rotate: `${doodle.rotate ?? 0}deg`,
       }}
-      initial={{
-        opacity: 0,
-        scale: 0.9,
-        rotate: (doodle.rotate ?? 0) - 4,
-      }}
-      animate={{
-        opacity: 1,
-        scale: 1,
-        rotate: doodle.rotate ?? 0,
-      }}
-      transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
       <Image
         src={doodle.src}
@@ -201,28 +180,11 @@ function StaticDoodle({ doodle }: { doodle: HeroStaticDoodle }) {
         height={doodle.intrinsicHeight}
         className="hero-static-doodle-image"
       />
-    </motion.div>
+    </div>
   );
 }
 
 export default function Hero() {
-  const heroRef = useRef<HTMLElement | null>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-
-  /**
-   * This moves ONLY the static doodles/timer.
-   * Sensorium and MP4 doodles do not move.
-   */
-  const staticDoodleGroupY = useTransform(
-    scrollYProgress,
-    [0, 0.000001],
-    [0, -260]
-  );
-
   const [countdown, setCountdown] = useState(getCountdownLabel);
 
   useEffect(() => {
@@ -235,18 +197,11 @@ export default function Hero() {
 
   return (
     <section
-      ref={heroRef}
       id="hero"
-      className="relative z-0 h-[145svh] overflow-visible"
+      className="relative z-0 h-[185svh] overflow-visible"
     >
       <div className="sticky top-0 flex h-[100svh] items-center justify-center overflow-hidden px-5 pb-12 pt-36 sm:px-10 sm:pt-44">
-        <motion.div
-          className="sensorium-stage"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-        >
-          {/* PINNED LAYER: Sensorium + MP4 doodles */}
+        <div className="sensorium-stage">
           <div className="hero-pinned-layer">
             <div className="hero-video-doodle-layer" aria-hidden="true">
               {heroDoodles.map((doodle) => (
@@ -266,33 +221,25 @@ export default function Hero() {
               className="hero-wordmark"
             />
           </div>
+        </div>
+      </div>
 
-          {/* SCROLLING LAYER: black/static doodles + timer */}
-          <motion.div
-            className="hero-static-doodle-group"
-            style={{ y: staticDoodleGroupY }}
-            aria-hidden="true"
-          >
+      <div className="hero-scroll-plane flex h-[100svh] items-center justify-center overflow-visible px-5 pb-12 pt-36 sm:px-10 sm:pt-44">
+        <div className="sensorium-stage">
+          <div className="hero-static-doodle-group" aria-hidden="true">
             {heroStaticDoodles.map((doodle) => (
               <StaticDoodle key={doodle.name} doodle={doodle} />
             ))}
 
-            <motion.p
+            <p
               className="hero-timer"
-              initial={{ opacity: 0, x: "-50%", y: 14 }}
-              animate={{ opacity: 1, x: "-50%", y: 0 }}
-              transition={{
-                duration: 0.65,
-                delay: 0.25,
-                ease: [0.22, 1, 0.36, 1],
-              }}
               aria-label="Countdown to 23 May 2026"
               suppressHydrationWarning
             >
               {countdown}
-            </motion.p>
-          </motion.div>
-        </motion.div>
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );

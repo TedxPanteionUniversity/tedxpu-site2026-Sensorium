@@ -17,6 +17,9 @@ export default function AboutSection() {
     <section id="about" className="about-cover" aria-labelledby="about-title">
       <div className="about-heading-group">
         <AboutTitle id="about-title" label={aboutSection.title} />
+        <span className="about-mobile-brand about-mobile-brand-tedx" aria-hidden="true">
+          {aboutSection.tedxLabel}
+        </span>
 
         <div className="about-brand-row" aria-hidden="true">
           <span className="about-brand about-brand-ted">{aboutSection.tedLabel}</span>
@@ -28,7 +31,17 @@ export default function AboutSection() {
       <div className="about-copy-grid" aria-label="About TED and TEDx">
         {aboutSection.copyBlocks.map((block) => (
           <article key={block.id} className={`about-copy-block about-copy-${block.id}`}>
+            {block.id === "ted" ? (
+              <span className="about-mobile-divider" aria-hidden="true">
+                {aboutSection.connectorLabel}
+              </span>
+            ) : null}
             <h3 className="sr-only">{block.label}</h3>
+            {block.id === "ted" ? (
+              <span className="about-mobile-brand about-mobile-brand-ted" aria-hidden="true">
+                {block.label}
+              </span>
+            ) : null}
             {block.paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}

@@ -813,6 +813,11 @@ a {
   text-align: center;
 }
 
+.about-mobile-brand,
+.about-mobile-divider {
+  display: none;
+}
+
 /* Responsive */
 
 @media (max-width: 1366px) {
@@ -990,7 +995,8 @@ a {
   }
 
   .year-stack .year-item-disabled {
-    display: none;
+    display: inline-flex;
+    font-size: clamp(1.85rem, 10vw, 3.2rem);
   }
 
   .teams-cover {
@@ -1144,8 +1150,141 @@ a {
     font-size: clamp(2.2rem, 14vw, 3.7rem);
   }
 
+  .year-stack .year-item-disabled {
+    font-size: clamp(1.65rem, 9vw, 2.65rem);
+  }
+
   .about-copy-grid {
     width: min(100% - 1.5rem, 34rem);
+  }
+}
+
+@media (max-width: 720px) {
+  .about-section {
+    background: #ffffff;
+  }
+
+  .about-cover {
+    overflow: hidden;
+    width: 100%;
+    min-height: auto;
+    margin-left: 0;
+    padding: 0 0 clamp(1.7rem, 7vw, 2.5rem);
+    background: #ffffff;
+  }
+
+  .about-heading-group {
+    display: grid;
+    gap: 0;
+    overflow: visible;
+    padding-bottom: 0;
+  }
+
+  .about-title {
+    left: 0;
+    width: 100vw;
+    transform: none;
+  }
+
+  .about-title-svg {
+    overflow: visible;
+    height: 26vw;
+    width: 104vw;
+    max-width: none;
+    transform: translateX(-1.95vw);
+  }
+
+  .about-title-svg text {
+    font-size: 300px;
+  }
+
+  .about-brand-row {
+    display: none;
+  }
+
+  .about-mobile-brand,
+  .about-mobile-divider {
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 950;
+    letter-spacing: 0;
+    line-height: 0.72;
+    text-transform: none;
+    white-space: nowrap;
+  }
+
+  .about-mobile-brand {
+    color: #ff0800;
+  }
+
+  .about-mobile-brand-tedx {
+    width: 100vw;
+    margin-top: clamp(-1rem, -1.5vw, -2rem);
+    padding-left: 0;
+    font-size: clamp(3.05rem, 13.2vw, 5.85rem);
+  }
+
+  .about-copy-grid {
+    display: grid;
+    width: auto;
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin: clamp(1.15rem, 5.6vw, 2.25rem) 0 0;
+  }
+
+  .about-copy-block,
+  .about-copy-ted,
+  .about-copy-tedx {
+    grid-column: 1;
+    width: auto;
+    max-width: none;
+    margin-top: 0;
+    color: #000000;
+    font-size: clamp(0.72rem, 3.28vw, 1rem);
+    font-weight: 400;
+    line-height: 1.08;
+    text-align: left;
+  }
+
+  .about-copy-tedx {
+    order: 1;
+    padding: 0 clamp(1.65rem, 7.1vw, 2.7rem) 0 clamp(1.55rem, 6.7vw, 2.65rem);
+  }
+
+  .about-copy-ted {
+    order: 2;
+    margin-top: clamp(1.9rem, 9.5vw, 3.75rem);
+  }
+
+  .about-copy-ted p {
+    padding-inline: clamp(1.55rem, 6.7vw, 2.65rem) clamp(1.65rem, 7.1vw, 2.7rem);
+  }
+
+  .about-copy-ted p:nth-of-type(n + 3) {
+    display: none;
+  }
+
+  .about-copy-block p + p {
+    margin-top: 1.08em;
+  }
+
+  .about-mobile-divider {
+    width: 100vw;
+    margin-top: clamp(0.2rem, 1.4vw, 0.55rem);
+    margin-left: 0;
+    color: #000000;
+    font-size: clamp(6.5rem, 30vw, 11rem);
+  }
+
+  .about-mobile-brand-ted {
+    width: 100vw;
+    margin-top: clamp(0.05rem, 0.8vw, 0.25rem);
+    padding-left: 0;
+    font-size: clamp(3rem, 15vw, 6.2rem);
+  }
+
+  .about-copy-ted .about-mobile-brand-ted + p {
+    margin-top: clamp(1.6rem, 7.5vw, 2.8rem);
   }
 }
 

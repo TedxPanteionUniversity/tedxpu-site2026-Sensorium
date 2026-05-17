@@ -389,6 +389,7 @@ a {
 
 .event-detail-panel {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(1.75rem, 3vw, 3rem);
   color: #000000;
 }
@@ -400,6 +401,7 @@ a {
   align-items: end;
   border-top: 1px solid rgb(0 0 0 / 18%);
   padding-top: clamp(1rem, 2vw, 1.75rem);
+  min-width: 0;
 }
 
 .event-detail-year {
@@ -416,6 +418,7 @@ a {
   letter-spacing: 0;
   line-height: 0.82;
   text-transform: uppercase;
+  overflow-wrap: anywhere;
 }
 
 .event-detail-close {
@@ -444,18 +447,21 @@ a {
   grid-template-columns: minmax(0, 1.1fr) minmax(19rem, 0.9fr);
   gap: clamp(2rem, 5vw, 6rem);
   align-items: start;
+  min-width: 0;
 }
 
 .event-detail-main {
   display: grid;
   gap: clamp(1.1rem, 2vw, 1.8rem);
+  min-width: 0;
 }
 
 .event-detail-image {
   display: block;
-  width: min(100%, 36rem);
+  width: auto;
+  max-width: min(100%, 36rem);
   height: auto;
-  max-height: 22rem;
+  max-height: 32rem;
   object-fit: contain;
   object-position: left center;
 }
@@ -519,6 +525,7 @@ a {
   font-size: clamp(1rem, 1.35vw, 1.24rem);
   font-weight: 700;
   line-height: 1.05;
+  overflow-wrap: anywhere;
 }
 
 .event-speaker-name {
@@ -961,6 +968,7 @@ a {
     --teams-cover-overflow: hidden;
     --teams-cover-padding-bottom: clamp(4rem, 18vw, 7rem);
     --teams-cover-padding-top: clamp(4rem, 16vw, 6rem);
+    --teams-about-overlap: 45svh;
     --teams-title-margin-left: -17.5vw;
     --teams-title-top: 5.5rem;
     --teams-title-width: 135vw;
@@ -1000,12 +1008,15 @@ a {
   }
 
   .teams-cover {
-    overflow: hidden;
-    min-height: auto;
+    overflow: visible;
+    isolation: isolate;
+    padding-top: var(--teams-cover-padding-top);
+    padding-bottom: var(--teams-cover-padding-bottom);
+    min-height: 180vh;
   }
 
   .teams-end-spacer {
-    height: clamp(3rem, 12vw, 5rem);
+    height: calc(clamp(3rem, 12vw, 5rem) + var(--teams-about-overlap));
   }
 
   .team-card-collage {
@@ -1024,7 +1035,7 @@ a {
   }
 
   .about-section {
-    margin-top: 0;
+    margin-top: calc(-1 * var(--teams-about-overlap));
   }
 
   .about-cover {
@@ -1119,6 +1130,14 @@ a {
 
   .event-detail-copy {
     font-size: clamp(1rem, 4.6vw, 1.2rem);
+  }
+
+  .event-detail-image {
+    width: auto;
+    max-width: 100%;
+    max-height: min(62svh, 28rem);
+    justify-self: center;
+    object-position: center;
   }
 
   .event-number {

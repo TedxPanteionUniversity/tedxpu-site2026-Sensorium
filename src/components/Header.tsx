@@ -50,10 +50,10 @@ export default function Header() {
   return (
     <header className="site-header fixed inset-x-0 top-0 z-[9999] bg-white/90 backdrop-blur px-5 sm:px-8 lg:px-9">
       <div className="header-inner flex items-start justify-between gap-6">
-        <a href="#hero" className="block shrink-0" aria-label="TEDx Panteion University home">
+        <a href="#hero" className="block shrink-0" aria-label="Sensorium - TEDxPanteion University 2026 home">
           <Image
             src="/assets/tedxpu-logo.png"
-            alt="TEDx Panteion University"
+            alt=""
             width={1364}
             height={492}
             priority
@@ -70,7 +70,7 @@ export default function Header() {
               key={item.href}
               className={activeHref === item.href ? "nav-link nav-link-active" : "nav-link"}
               href={item.href}
-              aria-current={activeHref === item.href ? "true" : undefined}
+              aria-current={activeHref === item.href ? "page" : undefined}
               onClick={() => setActiveHref(item.href)}
             >
               {item.label}

@@ -1,34 +1,9 @@
 "use client";
 
-import { heroDoodles, heroStaticDoodles, targetDateMs } from "@/data/hero";
+import { heroDoodles, heroStaticDoodles } from "@/data/hero";
 import type { HeroDoodle, HeroStaticDoodle } from "@/data/hero";
 import Image from "next/image";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
-
-const eventStartedLabel = "Event Started";
-const eventStartedVisibleUntilMs = targetDateMs + 24 * 60 * 60 * 1000;
-
-function getTimerLabel() {
-  const now = Date.now();
-
-  if (now >= eventStartedVisibleUntilMs) {
-    return null;
-  }
-
-  if (now >= targetDateMs) {
-    return eventStartedLabel;
-  }
-
-  const distance = targetDateMs - now;
-  const totalMinutes = Math.floor(distance / 60000);
-  const days = Math.floor(totalMinutes / 1440);
-  const hours = Math.floor((totalMinutes % 1440) / 60);
-  const minutes = totalMinutes % 60;
-
-  return [days, hours, minutes]
-    .map((value) => String(value).padStart(2, "0"))
-    .join(":");
-}
+import { useEffect, useRef } from "react";
 
 function DoodleVideo({ doodle }: { doodle: HeroDoodle }) {
   return (
@@ -81,30 +56,6 @@ function StaticDoodle({ doodle }: { doodle: HeroStaticDoodle }) {
 
 export default function Hero() {
   const staticDoodleGroupRef = useRef<HTMLDivElement | null>(null);
-  const [timerLabel, setTimerLabel] = useState(getTimerLabel);
-
-  useLayoutEffect(() => {
-    setTimerLabel(getTimerLabel());
-  }, []);
-
-  useEffect(() => {
-    const interval = window.setInterval(() => {
-      setTimerLabel(getTimerLabel());
-    }, 1000);
-
-    const handlePageShow = (event: PageTransitionEvent) => {
-      if (event.persisted) {
-        setTimerLabel(getTimerLabel());
-      }
-    };
-
-    window.addEventListener("pageshow", handlePageShow);
-
-    return () => {
-      window.clearInterval(interval);
-      window.removeEventListener("pageshow", handlePageShow);
-    };
-  }, []);
 
   useEffect(() => {
     const staticLayer = staticDoodleGroupRef.current;
@@ -185,20 +136,6 @@ export default function Hero() {
             {heroStaticDoodles.map((doodle) => (
               <StaticDoodle key={doodle.name} doodle={doodle} />
             ))}
-
-            {timerLabel ? (
-              <p
-                className="hero-timer"
-                aria-label={
-                  timerLabel === eventStartedLabel
-                    ? eventStartedLabel
-                    : "Countdown to 23 May 2026"
-                }
-                suppressHydrationWarning
-              >
-                {timerLabel}
-              </p>
-            ) : null}
           </div>
         </div>
       </div>

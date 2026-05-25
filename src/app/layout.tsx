@@ -18,27 +18,32 @@ const siteUrl =
   process.env.URL ??
   "https://tedxpanteionuniversity.com";
 
+const siteName = "TEDxPanteion University";
+const eventName = "Sensorium";
+const fullTitle = `${eventName} - ${siteName} 2026`;
+const siteDescription =
+  "TEDxPanteion University 2026 presents Sensorium, an event exploring perception, the senses, technology, society, science, and culture.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  applicationName: "TEDxPanteion University",
+  applicationName: siteName,
   title: {
-    default: "Sensorium | TEDxPanteion University 2026",
-    template: "%s | TEDxPanteion University",
+    default: fullTitle,
+    template: `%s - ${siteName}`,
   },
-  description:
-    "TEDxPanteion University 2026 presents Sensorium, an event exploring perception, the senses, technology, society, science, and culture.",
+  description: siteDescription,
   keywords: [
-    "TEDxPanteion University",
+    siteName,
     "TEDxPU",
     "TEDx",
     "Panteion University",
-    "Sensorium",
+    eventName,
     "TEDx 2026",
     "Athens events",
   ],
-  authors: [{ name: "TEDxPanteion University" }],
-  creator: "TEDxPanteion University",
-  publisher: "TEDxPanteion University",
+  authors: [{ name: siteName }],
+  creator: siteName,
+  publisher: siteName,
   alternates: {
     canonical: "/",
   },
@@ -49,17 +54,16 @@ export const metadata: Metadata = {
     apple: "/icon.png",
   },
   openGraph: {
-    title: "Sensorium | TEDxPanteion University 2026",
-    description:
-      "Explore Sensorium, the 2026 TEDxPanteion University event about how we sense, perceive, and connect with the world.",
+    title: fullTitle,
+    description: siteDescription,
     url: "/",
-    siteName: "TEDxPanteion University",
+    siteName,
     images: [
       {
         url: "/assets/events/2026.avif",
         width: 2500,
         height: 1309,
-        alt: "Sensorium TEDxPanteion University 2026",
+        alt: `${eventName} ${siteName} 2026`,
       },
     ],
     locale: "en_US",
@@ -67,9 +71,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sensorium | TEDxPanteion University 2026",
-    description:
-      "Explore Sensorium, the 2026 TEDxPanteion University event about senses, perception, and human experience.",
+    title: fullTitle,
+    description: siteDescription,
     images: ["/assets/events/2026.avif"],
   },
   robots: {

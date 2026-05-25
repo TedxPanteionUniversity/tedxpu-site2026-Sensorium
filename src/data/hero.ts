@@ -1,5 +1,3 @@
-export const targetDateMs = new Date("2026-05-23T11:30:00+03:00").getTime();
-
 export type HeroDoodle = {
   name: string;
   src: string;
